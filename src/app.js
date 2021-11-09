@@ -26,16 +26,18 @@ window.onload = function() {
       lastname,
       city,
       postalcode,
+      inlineFormSelectPref,
       message
     } = form;
-    let regexCard = /^[0-9]{13-16}$/;
-    let regexCvc = /^[0-9]{3}$/;
+    let regexCard = /^[0-9]{13}$/;
+    let regexCvc = /^[0-9]{4}$/;
     let regexAmount = /^[0-9]+$/;
-    let regexFirstname = /^[A-Za-z]+$/;
+    let regexFirstname = /^[a-zA-Z]+$/;
     let regexLastname = /^[a-zA-Z]+$/;
     let regexCity = /^[a-zA-Z]+$/;
     let regexPostalcode = /^[0-9]{7}$/;
     let regexMessage = /^[a-zA-Z0-9.!#-_]+$/;
+    let regexInlineFormSelectPref = /[1.value, 2.value, 3.value]$/;
 
     if (regexCard.test(card.value) !== true) {
       document.querySelector("#alert").classList.remove("d-none");
@@ -100,6 +102,18 @@ window.onload = function() {
       document.querySelector("#alert").classList.add("d-none");
       document.querySelector("#message").classList.remove("alert-danger");
       document.getElementById("message").classList.add("is-valid");
+    }
+    if (regexInlineFormSelectPref.test(inlineFormSelectPref.value) !== true) {
+      document.querySelector("#alert").classList.remove("d-none");
+      document
+        .getElementById("inlineFormSelectPref")
+        .classList.add("alert-danger");
+    } else {
+      document.querySelector("#alert").classList.add("d-none");
+      document
+        .querySelector("#inlineFormSelectPref")
+        .classList.remove("alert-danger");
+      document.getElementById("inlineFormSelectPref").classList.add("is-valid");
     }
   });
 };
